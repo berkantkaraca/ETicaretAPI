@@ -1,5 +1,6 @@
 ﻿using ETicaretAPI.Application.Abstractions;
 using ETicaretAPI.Application.Repositories;
+using ETicaretAPI.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretAPI.API.Controllers
@@ -10,32 +11,25 @@ namespace ETicaretAPI.API.Controllers
     {
         private readonly IProductReadRepository _productReadRepository;
         private readonly IProductWriteRepository _productWriteRepository;
+        private readonly IOrderWriteRepository _orderWriteRepository;
+        private readonly IOrderReadRepository _orderReadRepository;
+        private readonly ICustomerWriteRepository _customerWriteRepository;
 
-        public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository)
+        public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository, IOrderWriteRepository orderWriteRepository, ICustomerWriteRepository customerWriteRepository, IOrderReadRepository orderReadRepository)
         {
             _productReadRepository = productReadRepository;
             _productWriteRepository = productWriteRepository;
+            _orderWriteRepository = orderWriteRepository;
+            _customerWriteRepository = customerWriteRepository;
+            _orderReadRepository = orderReadRepository;
         }
 
         [HttpGet]
         public async Task Get()
         {
-            //await _productWriteRepository.AddRangeAsync(new()
-            //{
-            //    new() { Id = Guid.NewGuid(), Name = "Product 1", Price = 100, Stock = 10 },
-            //    new() { Id = Guid.NewGuid(), Name = "Product 2", Price = 200, Stock = 20 },
-            //    new() { Id = Guid.NewGuid(), Name = "Product 3", Price = 300, Stock = 30 }
-            //});
-            //await _productWriteRepository.SaveAsync();
-
-            //var products = _productReadRepository.GetAll();
-            //return Ok(products);
-
-            var p = await _productReadRepository.GetByIdAsync("be7cd9ef-7ba0-4193-9439-08eac134c774", false );
-
-            p.Name = "mehmet";
-
-            _productWriteRepository.SaveAsync();
+            Order order = await _orderReadRepository.GetByIdAsync("61095f56-8437-41aa-986a-be90301b31fb");
+            order.Address = "Güncellenen adres bilgisid";
+            await _orderWriteRepository.SaveAsync();
         }
 
         [HttpGet("{id}")]
