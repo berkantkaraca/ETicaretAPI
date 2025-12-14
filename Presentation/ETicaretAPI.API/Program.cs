@@ -10,6 +10,12 @@ namespace ETicaretAPI.API
 
             builder.Services.AddPersistenceServices();
 
+            //Cors
+            builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+            }));
+
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
@@ -23,6 +29,8 @@ namespace ETicaretAPI.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
 
