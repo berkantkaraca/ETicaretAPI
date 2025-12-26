@@ -13,7 +13,7 @@ namespace ETicaretAPI.API
             //Cors
             builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
             {
-                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200");
             }));
 
             builder.Services.AddControllers();
