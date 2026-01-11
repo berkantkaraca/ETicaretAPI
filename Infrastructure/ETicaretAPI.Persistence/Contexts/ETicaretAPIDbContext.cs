@@ -14,6 +14,11 @@ namespace ETicaretAPI.Persistence.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
+        //File, ProductImageFile ve InvoiceFile entity'leri arasında TPH kullanılacaktır.
+        public DbSet<Domain.Entities.File> Files { get; set; }
+        public DbSet<ProductImageFile> ProductImageFiles { get; set; }
+        public DbSet<InvoiceFile> InvoiceFiles { get; set; }
+
         /// <summary>
         /// ETicaretAPI.Persistence.Repositories.WriteRepositor'deki SaveAsync kullanılan SaveChangesAsync metodu türünde override edilmiştir.
         /// </summary>
