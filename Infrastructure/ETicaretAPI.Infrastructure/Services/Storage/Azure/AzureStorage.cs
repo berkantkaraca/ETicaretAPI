@@ -53,6 +53,18 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Azure
                 await blobClient.UploadAsync(file.OpenReadStream());
                 datas.Add((fileNewName, $"{containerName}/{fileNewName}"));
             }
+            //todo
+            /*
+             https://bketicaret.blob.core.windows.net/photo/favicon-16x16.png
+             
+            upload edilmiş dosyasının veritabanında tutulması şekline
+
+            sürekli dosya/resim ihtiyaçlarını local'de tutmak (örneğin api sahibi firma logo görseli), son kullanıcıların dosya/resim ihtiyaçlarını ise azure gibi 3ncü parti bir sunucu'da tutmak (örneğin ürün fotoğrafları) gibi bir senaryo'da, veritabanında domain(https:/azure.com) ve querystring(/photos/a.jpg) kısımlarını tabloda ayrı ayrı sütunlarda tutmak, 
+
+            fonksiyonel olarak'ta domain hücresi boş ise, api'nin veya storage servisinin default domain tanımının kullanılması, değilise, özel domainin veritabanındaki ilgili hücreden combine kullanılması gibi bir zenginlik hayal ettim. 
+            
+            Bu sayede farklı azure containerları dahi aynı api'de kullanılabilir. Domain sütunu içinde, bu özelleştirme yapılabilir.
+             */
 
             return datas;
         }

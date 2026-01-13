@@ -9,6 +9,7 @@ namespace ETicaretAPI.Domain.Entities
         public float Price { get; set; }
 
         public ICollection<Order> Orders { get; set; } // 1 product'ın birden fazla order'ı olabilir
+        public ICollection<ProductImageFile> ProductImageFiles { get; set; }
 
     }
 }
