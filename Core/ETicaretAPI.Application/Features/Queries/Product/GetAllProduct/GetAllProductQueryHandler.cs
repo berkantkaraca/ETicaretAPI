@@ -9,7 +9,7 @@ namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProduct
     {
         readonly IProductReadRepository _productReadRepository;
 
-        public GetAllProductQueryHandler(IProductReadRepository productReadRepository, ILogger<GetAllProductQueryHandler> logger)
+        public GetAllProductQueryHandler(IProductReadRepository productReadRepository)
         {
             _productReadRepository = productReadRepository;
         }
