@@ -117,5 +117,18 @@ namespace ETicaretAPI.Persistence.Services
                 await _basketItemWriteRepository.SaveAsync();
             }
         }
+
+        public Basket? GetUserActiveBasket
+        {
+            get
+            {
+                //.Result, async bir metodun döndürdüğü Task’in sonucunu senkron olarak bekler ve dönen değeri alır.
+                //Deadlock oluşturabilir
+                //Thread blocking yapar(performans düşer)
+                //Async yapının mantığını bozar
+                Basket? basket = ContextUser().Result;
+                return basket;
+            }
+        }
     }
 }
