@@ -285,6 +285,7 @@ namespace ETicaretAPI.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
+                    OrderCode = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -350,6 +351,12 @@ namespace ETicaretAPI.Persistence.Migrations
                 name: "IX_Baskets_UserId",
                 table: "Baskets",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderCode",
+                table: "Orders",
+                column: "OrderCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductProductImageFile_ProductsId",
