@@ -300,6 +300,26 @@ namespace ETicaretAPI.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CompletedOrders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompletedOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompletedOrders_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -353,6 +373,12 @@ namespace ETicaretAPI.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CompletedOrders_OrderId",
+                table: "CompletedOrders",
+                column: "OrderId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_OrderCode",
                 table: "Orders",
                 column: "OrderCode",
@@ -385,10 +411,10 @@ namespace ETicaretAPI.Persistence.Migrations
                 name: "BasketItems");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "CompletedOrders");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "ProductProductImageFile");
@@ -397,13 +423,16 @@ namespace ETicaretAPI.Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Baskets");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Files");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Baskets");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
