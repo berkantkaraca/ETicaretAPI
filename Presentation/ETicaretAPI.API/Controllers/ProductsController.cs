@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.Consts;
+﻿using ETicaretAPI.Application.Abstractions.Services;
+using ETicaretAPI.Application.Consts;
 using ETicaretAPI.Application.CustomAttributes;
 using ETicaretAPI.Application.Enums;
 using ETicaretAPI.Application.Features.Commands.Product.CreateProduct;
@@ -23,10 +24,12 @@ namespace ETicaretAPI.API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        readonly IProductService _productService;
 
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator, IProductService productService)
         {
             _mediator = mediator;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -41,6 +44,14 @@ namespace ETicaretAPI.API.Controllers
         {
             GetByIdProductQueryResponse response = await _mediator.Send(getByIdProductQueryRequest);
             return Ok(response);
+        }
+
+        [HttpGet("qrcode/{productId}")]
+        public async Task<IActionResult> GetQrCodeToProduct([FromRoute] string productId)
+        {
+            var data = await _productService.QrCodeToProductAsync(productId);
+            return File(data, "image/png");
+
         }
 
         [HttpPost]

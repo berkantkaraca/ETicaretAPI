@@ -131,7 +131,6 @@ namespace ETicaretAPI.Persistence.Services
             if (endpoint == null)
                 return false;
 
-            var hasRole = false;
             var endpointRoles = endpoint.Roles.Select(r => r.Name);
 
             foreach (var userRole in userRoles)
