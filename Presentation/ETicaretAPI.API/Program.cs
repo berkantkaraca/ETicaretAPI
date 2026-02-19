@@ -1,5 +1,6 @@
 using ETicaretAPI.API.Configurations.ColumnWriters;
 using ETicaretAPI.API.Extensions;
+using ETicaretAPI.API.Filters;
 using ETicaretAPI.Application;
 using ETicaretAPI.Application.Validators.Products;
 using ETicaretAPI.Infrastructure;
@@ -42,6 +43,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidationFilter>(); //EF Core Validasyonlarýný devre dýþý býrakýp kendi filterýmýzý ekliyoruz
+    options.Filters.Add<RolePermissionFilter>();
 })
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>()) //Fluent Validationlarý ekler
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true); //EF Core Validasyonlarýný devre dýþý býrakýr
